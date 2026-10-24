@@ -1,0 +1,70 @@
+[build-system]
+requires = ["setuptools>=68", "wheel", "setuptools_scm[toml]>=8"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["silenciosynth*"]
+
+[tool.setuptools.package-data]
+silenciosynth = ["py.typed"]
+
+[project]
+name = "silenciosynth"
+description = "ONNX-first Silencio TTS runtime with kokorog2p frontend"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {file = "LICENSE"}
+authors = [{name = "Buchwandler contributors"}]
+keywords = ["tts", "silencio", "onnx", "onnxruntime", "kokorog2p", "voice-cloning"]
+dependencies = [
+  "numpy>=1.26",
+  "platformdirs>=4,<5",
+  "kokorog2p[en]>=0.9.15,<1.0",
+]
+dynamic = ["version"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "License :: OSI Approved :: Apache Software License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Topic :: Multimedia :: Sound/Audio :: Speech",
+]
+
+[project.urls]
+Homepage = "https://github.com/buchwandler/silenciosynth"
+Repository = "https://github.com/buchwandler/silenciosynth"
+Issues = "https://github.com/buchwandler/silenciosynth/issues"
+
+[project.scripts]
+silenciosynth = "silenciosynth.cli:main"
+
+[project.optional-dependencies]
+cpu = ["onnxruntime>=1.20"]
+gpu = ["onnxruntime-gpu>=1.20"]
+directml = ["onnxruntime-directml>=1.20"]
+dev = ["pytest>=8", "ruff>=0.9", "mypy>=1.13", "build>=1.2"]
+
+[tool.setuptools_scm]
+write_to = "silenciosynth/_version.py"
+fallback_version = "0.0.0"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "C4", "SIM"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.10"
+ignore_missing_imports = true

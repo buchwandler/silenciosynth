@@ -1,0 +1,18 @@
+schema_version = 3
+
+[project]
+uuid = "1ebd32d8-ffe3-476c-8aa3-d67d2c1e34b7"
+name = "silenciosynth"
+
+[ledgers.taskledger.mounts.data]
+storage = "external"
+root = "../ledger"
+
+[ledgers.taskledger.mounts.runtime]
+storage = "user-data"
+
+[ledgers.taskledger.mounts.logs]
+storage = "user-data"
+
+[ledgers.taskledger.mounts.indexes]
+storage = "cache"
